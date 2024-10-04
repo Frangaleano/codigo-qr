@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         codeDisplay.innerText = `Ya se ha mostrado un código en esta sesión: ${usedCode}`;
     } else {
         // Solo solicitar un nuevo código si no hay uno guardado en localStorage
-        fetch('/.netlify/functions/get-code') // Cambiado a la ruta de la función serverless
+        fetch('/.netlify/functions/get-code') // Correcta
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Error en la red');
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const usedCode = localStorage.getItem('usedCode');
         if (usedCode) {
             // Enviar una petición para eliminar el código solo del archivo JSON
-            fetch('/.netlify/functions/remove-code', {
+            fetch('/.netlify/functions/remove-code', { // Correcta
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

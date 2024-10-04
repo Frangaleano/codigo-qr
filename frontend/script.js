@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         codeDisplay.innerText = `Ya se ha mostrado un código en esta sesión: ${usedCode}`;
     } else {
         // Solo solicitar un nuevo código si no hay uno guardado en localStorage
-        fetch('/api/get-code') // Ruta actualizada
+        fetch('/api/get-code')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Error en la red');
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.code) {
                     // Mostrar el código y guardarlo en localStorage
                     codeDisplay.innerText = `Código: ${data.code}`;
-                    localStorage.setItem('usedCode', data.code); // Guardar el código en localStorage
+                    localStorage.setItem('usedCode', data.code);  // Guardar el código en localStorage
                 } else {
                     codeDisplay.innerText = data.message; // Mensaje si no hay códigos disponibles
                 }
@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('beforeunload', () => {
         const usedCode = localStorage.getItem('usedCode');
         if (usedCode) {
-            // Enviar una petición para eliminar el código solo del archivo JSON
-            fetch('/api/remove-code', { // Ruta actualizada
+            // Enviar una petición para eliminar el código
+            fetch('/api/remove-code', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
                 console.log(data.message);
-                // No se elimina el código del localStorage, solo del archivo codes.json
             })
             .catch(error => {
                 console.error('Error al eliminar el código:', error);

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const codesFilePath = path.join(process.cwd(), 'codes.json'); // Cambiado a process.cwd()
+const codesFilePath = path.join(__dirname, '..', 'codes.json'); // Ajuste de la ruta
 
 exports.handler = async (event) => {
     try {

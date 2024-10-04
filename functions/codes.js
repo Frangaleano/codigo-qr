@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const router = express.Router();
-const codesFilePath = path.join(process.cwd(), 'codes.json'); // Usar process.cwd()
+const codesFilePath = path.join(__dirname, '..', 'codes.json'); // Ajuste de la ruta
 
 // Ruta para obtener un código
 router.get('/get-code', (req, res) => {

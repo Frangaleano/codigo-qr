@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         codeDisplay.innerText = `Ya se ha mostrado un código en esta sesión: ${usedCode}`;
     } else {
         // Solo solicitar un nuevo código si no hay uno guardado en localStorage
-        fetch('http://localhost:3000/api/get-code')
+        fetch('https://codigo-burguer.netlify.app/.netlify/functions/get-code')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Error en la red');
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const usedCode = localStorage.getItem('usedCode');
         if (usedCode) {
             // Enviar una petición para eliminar el código solo del archivo JSON
-            fetch('http://localhost:3000/api/remove-code', {
+            fetch('https://codigo-burguer.netlify.app/.netlify/functions/remove-code', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const codesFilePath = path.join(__dirname, 'codes.json');
+const codesFilePath = path.join(process.cwd(), 'codes.json'); // Cambiado a process.cwd()
 
 exports.handler = async (event) => {
     try {

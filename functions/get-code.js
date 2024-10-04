@@ -1,14 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 
-const codesFilePath = path.join(__dirname, 'codes.json');
+const codesFilePath = path.join(process.cwd(), 'codes.json'); // Cambiado a process.cwd()
 
 exports.handler = async () => {
     try {
         const data = await fs.promises.readFile(codesFilePath, 'utf8');
         const codes = JSON.parse(data);
 
-        if (codes.length === 0) {
+        if (!codes || codes.length === 0) {
             return {
                 statusCode: 404,
                 body: JSON.stringify({ message: 'No hay más códigos disponibles' }),

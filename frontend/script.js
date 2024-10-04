@@ -2,14 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const codeDisplay = document.getElementById('codeDisplay');
 
     // Obtener el código usado del localStorage
-    const usedCode = localStorage.getItem('usedCode'); 
+    const usedCode = localStorage.getItem('usedCode');
 
     // Si ya se ha mostrado un código en esta sesión, solo mostrar ese código
     if (usedCode) {
         codeDisplay.innerText = `Ya se ha mostrado un código en esta sesión: ${usedCode}`;
     } else {
         // Solo solicitar un nuevo código si no hay uno guardado en localStorage
-        fetch('/.netlify/functions/get-code') // Correcta
+        fetch('/api/get-code') // Ruta actualizada
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Error en la red');
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const usedCode = localStorage.getItem('usedCode');
         if (usedCode) {
             // Enviar una petición para eliminar el código solo del archivo JSON
-            fetch('/.netlify/functions/remove-code', { // Correcta
+            fetch('/api/remove-code', { // Ruta actualizada
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

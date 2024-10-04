@@ -1,13 +1,13 @@
 [build]
-  functions = "functions"   
-  publish = "frontend"        
+  publish = "frontend"   
+  functions = "functions"
 
 [[redirects]]
-  from = "/api/get-code"     
+  from = "/api/get-code"
   to = "/.netlify/functions/get-code"
   status = 200
 
 [[redirects]]
-  from = "/api/remove-code"   
+  from = "/api/remove-code"
   to = "/.netlify/functions/remove-code"
   status = 200

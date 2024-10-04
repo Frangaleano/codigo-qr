@@ -31,4 +31,5 @@ exports.handler = async () => {
             body: JSON.stringify({ message: 'Error al obtener el código' }),
         };
     }
+    
 };

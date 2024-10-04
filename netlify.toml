@@ -1,7 +1,13 @@
 [build]
-  functions = "functions"
-  publish = "frontend"     
+  functions = "functions"  # Directorio donde se encuentran tus funciones serverless
+  publish = "frontend"      # Directorio donde se encuentran tus archivos estáticos
+
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/codes"
+  from = "/api/get-code"   # Redirige a la función get-code
+  to = "/.netlify/functions/get-code"
+  status = 200
+
+[[redirects]]
+  from = "/api/remove-code" # Redirige a la función remove-code
+  to = "/.netlify/functions/remove-code"
   status = 200

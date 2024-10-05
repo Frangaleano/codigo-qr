@@ -3,11 +3,11 @@
   functions = "functions"
 
 [[redirects]]
-  from = "./functions/get-code"
+  from = "/api/get-code"
   to = "/.netlify/functions/get-code"
   status = 200
 
 [[redirects]]
-  from = "./functions/remove-code"
+  from = "/api/remove-code"
   to = "/.netlify/functions/remove-code"
   status = 200

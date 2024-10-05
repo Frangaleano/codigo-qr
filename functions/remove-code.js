@@ -1,39 +1,34 @@
 const fs = require('fs');
 const path = require('path');
 
-exports.handler = async (event) => {
-    const filePath = path.join(__dirname, 'codes.json');
+exports.handler = async () => {
+    const filePath = path.resolve(__dirname, '../codes.json');  // Ajustar la ruta para asegurarse que apunte al archivo en la raíz
 
     try {
-        const body = JSON.parse(event.body); // Asegúrate de que event.body está presente
-        const { code } = body;  // Extrae el código del cuerpo de la solicitud
-
         const fileData = fs.readFileSync(filePath, 'utf8');
-        let codes = JSON.parse(fileData);
+        let codes = JSON.parse(fileData); // Parsear el contenido del archivo JSON
 
-        const codeIndex = codes.indexOf(code);  // Buscar el código en el array
-
-        if (codeIndex === -1) {
+        if (codes.length === 0) {
             return {
                 statusCode: 404,
-                body: JSON.stringify({ message: 'El código no fue encontrado o ya fue usado' }),
+                body: JSON.stringify({ message: 'No hay más códigos disponibles' }),
             };
         }
 
-        codes.splice(codeIndex, 1);  // Eliminar el código del array
+        const code = codes.shift();  // Obtener y eliminar el primer código del array
 
         // Guardar el nuevo array de códigos en el archivo
         fs.writeFileSync(filePath, JSON.stringify(codes, null, 2), 'utf8');
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: 'Código eliminado correctamente' }),
+            body: JSON.stringify({ code: code }),
         };
     } catch (error) {
         console.error('Error al leer o escribir el archivo:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: 'Error al eliminar el código' }),
+            body: JSON.stringify({ message: 'Error al obtener el código' }),
         };
     }
 };

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 exports.handler = async () => {
-    const filePath = path.join(__dirname, 'codes.json');  // Ruta del archivo codes.json
+    const filePath = path.resolve(__dirname, '../codes.json');  // Ajustar la ruta para asegurarse que apunte al archivo en la raíz
 
     try {
         const fileData = fs.readFileSync(filePath, 'utf8');
@@ -31,5 +31,4 @@ exports.handler = async () => {
             body: JSON.stringify({ message: 'Error al obtener el código' }),
         };
     }
-    
 };

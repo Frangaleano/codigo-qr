@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         codeDisplay.innerText = `Ya se ha mostrado un código en esta sesión: ${usedCode}`;
     } else {
         // Solo solicitar un nuevo código si no hay uno guardado en localStorage
-        fetch('/.netlify/functions/get-code')
+        fetch('./functions/get-code')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Error en la red');

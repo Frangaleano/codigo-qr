@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 exports.handler = async () => {
-    const filePath = path.resolve(__dirname, '../codes.json');  // Ajustar la ruta para asegurarse que apunte al archivo en la raíz
+    const filePath = path.resolve(__dirname, './codes.json');  // Ajustar la ruta para asegurarse que apunte al archivo en la raíz
 
     try {
         const fileData = fs.readFileSync(filePath, 'utf8');

@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 exports.handler = async () => {
-    const filePath = path.resolve(__dirname, './codes.json');  // Ajustar la ruta para asegurarse que apunte al archivo en la raíz
+    // Asegurarte de que el archivo codes.json esté en la misma carpeta que la función
+    const filePath = path.join(__dirname, 'codes.json'); // Correcto para Netlify Functions
 
     try {
         const fileData = fs.readFileSync(filePath, 'utf8');

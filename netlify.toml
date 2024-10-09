@@ -2,6 +2,9 @@
   publish = "frontend"   
   functions = "functions" 
 
+[[functions]]
+  included_files = ["functions/codes.json"]  # Asegúrate de incluir el archivo JSON
+
 [[redirects]]
   from = "/api/get-code"
   to = "/.netlify/functions/get-code"

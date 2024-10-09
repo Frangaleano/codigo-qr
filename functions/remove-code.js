@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 exports.handler = async () => {
-    // Asegurarte de que el archivo codes.json esté en la misma carpeta que la función
     const filePath = path.join(__dirname, 'codes.json'); // Correcto para Netlify Functions
+
+    console.log('Ruta del archivo codes.json:', filePath); // Para depuración
 
     try {
         const fileData = fs.readFileSync(filePath, 'utf8');
@@ -16,7 +17,7 @@ exports.handler = async () => {
             };
         }
 
-        const code = codes.shift();  // Obtener y eliminar el primer código del array
+        const code = codes.shift(); // Obtener y eliminar el primer código del array
 
         // Guardar el nuevo array de códigos en el archivo
         fs.writeFileSync(filePath, JSON.stringify(codes, null, 2), 'utf8');

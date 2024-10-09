@@ -3,7 +3,7 @@
   functions = "functions" 
 
 [[functions]]
-  included_files = ["functions/codes.json"]  # Asegúrate de incluir el archivo JSON
+  included_files = ["functions/codes.json"] 
 
 [[redirects]]
   from = "/api/get-code"

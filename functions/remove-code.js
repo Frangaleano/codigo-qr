@@ -1,36 +1,43 @@
-const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
 
-exports.handler = async () => {
-    const filePath = path.join(__dirname, 'codes.json'); // Correcto para Netlify Functions
+// Conectar a la base de datos
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
-    console.log('Ruta del archivo codes.json:', filePath); // Para depuración
+// Verificar si el modelo ya ha sido definido
+let Code;
+try {
+    Code = mongoose.model('Code');
+} catch (error) {
+    Code = mongoose.model('Code', new mongoose.Schema({
+        code: { type: String, required: true }
+    }));
+}
+
+exports.handler = async (event) => {
+    const { code } = JSON.parse(event.body); // Obtener el código del cuerpo de la petición
 
     try {
-        const fileData = fs.readFileSync(filePath, 'utf8');
-        let codes = JSON.parse(fileData); // Parsear el contenido del archivo JSON
+        const result = await Code.findOneAndDelete({ code: code }); // Eliminar el código
 
-        if (codes.length === 0) {
+        if (!result) {
             return {
                 statusCode: 404,
-                body: JSON.stringify({ message: 'No hay más códigos disponibles' }),
+                body: JSON.stringify({ message: 'Código no encontrado' }),
             };
         }
 
-        const code = codes.shift(); // Obtener y eliminar el primer código del array
-
-        // Guardar el nuevo array de códigos en el archivo
-        fs.writeFileSync(filePath, JSON.stringify(codes, null, 2), 'utf8');
-
         return {
             statusCode: 200,
-            body: JSON.stringify({ code: code }),
+            body: JSON.stringify({ message: 'Código eliminado correctamente' }),
         };
     } catch (error) {
-        console.error('Error al leer o escribir el archivo:', error);
+        console.error('Error al eliminar el código:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: 'Error al obtener el código' }),
+            body: JSON.stringify({ message: 'Error al eliminar el código' }),
         };
     }
 };

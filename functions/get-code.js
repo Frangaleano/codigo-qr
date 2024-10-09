@@ -1,32 +1,39 @@
-const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
+
+// Conectar a la base de datos
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+// Verificar si el modelo ya ha sido definido
+let Code;
+try {
+    Code = mongoose.model('Code');
+} catch (error) {
+    Code = mongoose.model('Code', new mongoose.Schema({
+        code: { type: String, required: true }
+    }));
+}
 
 exports.handler = async () => {
-    const filePath = path.join(__dirname, 'codes.json'); // Usar __dirname para obtener la ruta del directorio actual
-
-    console.log('Ruta del archivo codes.json:', filePath); // Para depuración
-
     try {
-        const fileData = fs.readFileSync(filePath, 'utf8');
-        let codes = JSON.parse(fileData);
+        // Obtener un código de la base de datos
+        const code = await Code.findOneAndDelete(); // Elimina y retorna el primer código
 
-        if (codes.length === 0) {
+        if (!code) {
             return {
                 statusCode: 404,
                 body: JSON.stringify({ message: 'No hay más códigos disponibles' }),
             };
         }
 
-        const code = codes.shift();
-
-        fs.writeFileSync(filePath, JSON.stringify(codes, null, 2), 'utf8');
-
         return {
             statusCode: 200,
-            body: JSON.stringify({ code: code }),
+            body: JSON.stringify({ code: code.code }), // Devuelve solo el código
         };
     } catch (error) {
-        console.error('Error al leer o escribir el archivo:', error);
+        console.error('Error al obtener el código:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ message: 'Error al obtener el código' }),

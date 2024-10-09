@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Si ya se ha mostrado un código en esta sesión, solo mostrar ese código
     if (usedCode) {
-        codeDisplay.innerText = `Ya se ha mostrado un código en esta sesión: ${usedCode}`;
+        codeDisplay.innerText = `Ya recibiste tu codigo:
+         ${usedCode}`;
     } else {
         // Solo solicitar un nuevo código si no hay uno guardado en localStorage
         fetch('./api/get-code')
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data.code) {
                     // Mostrar el código y guardarlo en localStorage
-                    codeDisplay.innerText = `Código: ${data.code}`;
+                    codeDisplay.innerText = `${data.code}`;
                     localStorage.setItem('usedCode', data.code);  // Guardar el código en localStorage
                 } else {
                     codeDisplay.innerText = data.message; // Mensaje si no hay códigos disponibles

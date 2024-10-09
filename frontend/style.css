@@ -1,11 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
+    margin: 0px 20px;
+    font-family: "Euclid Circular A";
+    background: linear-gradient(180deg, rgba(140, 34, 195, 1) 0%, rgba(68, 9, 126, 1) 53%, rgba(28, 1, 59, 1) 100%);
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
-p {
-    font-size: 24px;
-    margin-top: 20px;
-    color: green;
+* {
+  box-sizing: border-box;
+}
+
+@media (min-width: 350px) {
+
+    header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        top: 0px;
+    }
+
+    header img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: solid 2px rgba(255, 199, 0, 0.75);
+    }
+
+    #codeDisplay {
+        border: solid 2px rgba(255, 199, 0, 0.75);
+        padding: 10px 25px;
+        border-radius: 20px;
+        animation: shadowAnimationIn 1.5s infinite;
+        text-align: center;
+    }
+
+
+    @keyframes shadowAnimationIn {
+
+        0%,
+        100% {
+            box-shadow: inset 0px 0px 31px 0px rgba(255, 199, 0, 0.75);
+        }
+    
+        50% {
+          box-shadow: none;
+        }
+    }
+
+    .div-img-texto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .div-img-texto img {
+        width: 150px;
+        filter: drop-shadow(9px 8px 10px black);
+        margin-top: 10px;
+    }
+
+    .div-img-texto p {
+        font-size: 12px;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+
+    .rombo2 {
+        width: 25px;
+        height: 25px;
+        background: transparent;
+        position: fixed;
+        transform: rotate(45deg);
+        border: 2px solid rgb(255, 255, 255);
+        bottom: 6px;
+        right: 12px;
+        transition: .3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        animation: shadowAnimation 1.5s infinite;
+    }
+
+    @keyframes shadowAnimation {
+
+        0%,
+        100% {
+            box-shadow: inset 0px 0px 31px 0px rgba(255, 255, 255);
+        }
+    
+        50% {
+          box-shadow: none;
+        }
+    }
+
+
 }

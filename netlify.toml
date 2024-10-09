@@ -1,9 +1,9 @@
 [build]
-  publish = "frontend"   
-  functions = "functions" 
+  publish = "frontend"
+  functions = "functions"
 
-[[functions]]
-  included_files = ["codes.json"] 
+[functions]
+  included_files = ["codes.json"]
 
 [[redirects]]
   from = "/api/get-code"
